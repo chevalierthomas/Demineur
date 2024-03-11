@@ -1,8 +1,8 @@
-#ifndef GAMEWINDOW_H
-#define GAMEWINDOW_H
-
 #include <QDialog>
-#include "ui_game.h" // Généré depuis game.ui
+#include <QPushButton>
+#include <QVector>
+#include <QGridLayout>
+#include "ui_game.h" // Assurez-vous que le nom correspond à votre fichier UI généré
 
 class GameWindow : public QDialog {
     Q_OBJECT
@@ -13,7 +13,8 @@ public:
 
 private:
     Ui::GameWindow ui;
-    void generateGameBoard(int width, int height, int mines);
+    QVector<QVector<QPushButton*>> buttonGrid; // Grille de boutons
+    void generateMines(int width, int height, int mines);
+    void reveal(int x, int y); // Révèle la case et gère la logique de jeu
 };
 
-#endif // GAMEWINDOW_H
