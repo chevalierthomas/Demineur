@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="test" qt:editorversion="12.0.2">
+    <qt:editorinfo initialGeometry="576.24;664.35;-20;-20;304.54;238.76"/>
+</scxml>

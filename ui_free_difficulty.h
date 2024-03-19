@@ -15,8 +15,8 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -29,12 +29,12 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLabel *label;
     QGridLayout *gridLayout;
-    QLabel *label_2;
-    QLineEdit *hauteur_input;
-    QLineEdit *largeur_input;
-    QLabel *label_4;
-    QLineEdit *pourcentage_input;
     QLabel *label_3;
+    QLabel *label_2;
+    QLabel *label_4;
+    QSpinBox *pourcentage_input;
+    QSpinBox *largeur_input;
+    QSpinBox *hauteur_input;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *validateButton;
     QPushButton *cancelButton;
@@ -55,7 +55,6 @@ public:
         QFont font;
         font.setPointSize(30);
         font.setBold(true);
-        font.setWeight(75);
         label->setFont(font);
         label->setAlignment(Qt::AlignCenter);
 
@@ -65,32 +64,19 @@ public:
         gridLayout->setSpacing(20);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(50, 10, 50, 10);
-        label_2 = new QLabel(verticalLayoutWidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_3 = new QLabel(verticalLayoutWidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
         QFont font1;
         font1.setPointSize(15);
+        label_3->setFont(font1);
+
+        gridLayout->addWidget(label_3, 1, 0, 1, 1);
+
+        label_2 = new QLabel(verticalLayoutWidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setFont(font1);
 
         gridLayout->addWidget(label_2, 0, 0, 1, 1);
-
-        hauteur_input = new QLineEdit(verticalLayoutWidget);
-        hauteur_input->setObjectName(QString::fromUtf8("hauteur_input"));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(hauteur_input->sizePolicy().hasHeightForWidth());
-        hauteur_input->setSizePolicy(sizePolicy);
-
-        gridLayout->addWidget(hauteur_input, 1, 1, 1, 1);
-
-        largeur_input = new QLineEdit(verticalLayoutWidget);
-        largeur_input->setObjectName(QString::fromUtf8("largeur_input"));
-        largeur_input->setEnabled(true);
-        sizePolicy.setHeightForWidth(largeur_input->sizePolicy().hasHeightForWidth());
-        largeur_input->setSizePolicy(sizePolicy);
-        largeur_input->setInputMethodHints(Qt::ImhDigitsOnly);
-
-        gridLayout->addWidget(largeur_input, 0, 1, 1, 1);
 
         label_4 = new QLabel(verticalLayoutWidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
@@ -98,18 +84,20 @@ public:
 
         gridLayout->addWidget(label_4, 2, 0, 1, 1);
 
-        pourcentage_input = new QLineEdit(verticalLayoutWidget);
+        pourcentage_input = new QSpinBox(verticalLayoutWidget);
         pourcentage_input->setObjectName(QString::fromUtf8("pourcentage_input"));
-        sizePolicy.setHeightForWidth(pourcentage_input->sizePolicy().hasHeightForWidth());
-        pourcentage_input->setSizePolicy(sizePolicy);
 
         gridLayout->addWidget(pourcentage_input, 2, 1, 1, 1);
 
-        label_3 = new QLabel(verticalLayoutWidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setFont(font1);
+        largeur_input = new QSpinBox(verticalLayoutWidget);
+        largeur_input->setObjectName(QString::fromUtf8("largeur_input"));
 
-        gridLayout->addWidget(label_3, 1, 0, 1, 1);
+        gridLayout->addWidget(largeur_input, 0, 1, 1, 1);
+
+        hauteur_input = new QSpinBox(verticalLayoutWidget);
+        hauteur_input->setObjectName(QString::fromUtf8("hauteur_input"));
+
+        gridLayout->addWidget(hauteur_input, 1, 1, 1, 1);
 
 
         verticalLayout_2->addLayout(gridLayout);
@@ -145,10 +133,9 @@ public:
     {
         CustomDifficultyDialog->setWindowTitle(QCoreApplication::translate("CustomDifficultyDialog", "D\303\251mineur", nullptr));
         label->setText(QCoreApplication::translate("CustomDifficultyDialog", "Personnaliser", nullptr));
-        label_2->setText(QCoreApplication::translate("CustomDifficultyDialog", "Largeur", nullptr));
-        largeur_input->setText(QString());
-        label_4->setText(QCoreApplication::translate("CustomDifficultyDialog", "Pourcentage de Mine", nullptr));
         label_3->setText(QCoreApplication::translate("CustomDifficultyDialog", "Hauteur", nullptr));
+        label_2->setText(QCoreApplication::translate("CustomDifficultyDialog", "Largeur", nullptr));
+        label_4->setText(QCoreApplication::translate("CustomDifficultyDialog", "Pourcentage de Mine", nullptr));
         validateButton->setText(QCoreApplication::translate("CustomDifficultyDialog", "D\303\251mmarer le jeu", nullptr));
         cancelButton->setText(QCoreApplication::translate("CustomDifficultyDialog", "Annuler", nullptr));
     } // retranslateUi

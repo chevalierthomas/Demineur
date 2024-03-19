@@ -15,6 +15,12 @@ HEADERS  += DifficultySelectionDialog.h \
             GameWindow.h
 
 FORMS    += choose_difficulty.ui \
+            dialog.ui \
             free_difficulty.ui \
             game.ui
+
+STATECHARTS +=
+
+RESOURCES += \
+    resources.qrc
 

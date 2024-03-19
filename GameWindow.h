@@ -1,6 +1,8 @@
+#ifndef GAMEWINDOW_H
+#define GAMEWINDOW_H
+
 #include <QDialog>
 #include <QPushButton>
-#include <QVector>
 #include <QGridLayout>
 #include "ui_game.h" // Assurez-vous que le nom correspond à votre fichier UI généré
 
@@ -13,8 +15,23 @@ public:
 
 private:
     Ui::GameWindow ui;
-    QVector<QVector<QPushButton*>> buttonGrid; // Grille de boutons
+    QVector<QVector<QPushButton*>> buttonGrid;
+    QVector<QVector<bool>> mineGrid;
+    QVector<QVector<bool>> revealedGrid;
+    QVector<QVector<bool>> flagGrid;
+    int gameWidth, gameHeight, totalMines;
+    const int buttonSize = 40; // Définissez ici la taille de vos boutons
+
+
     void generateMines(int width, int height, int mines);
-    void reveal(int x, int y); // Révèle la case et gère la logique de jeu
+    void reveal(int x, int y);
+    void toggleFlag(int x, int y);
+    int countAdjacentMines(int x, int y);
+    void checkWinCondition();
+    void gameOver(bool win);
+
+    // Ajoutez d'autres méthodes nécessaires ici
 };
+
+#endif // GAMEWINDOW_H
 

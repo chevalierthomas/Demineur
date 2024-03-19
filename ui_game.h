@@ -13,6 +13,9 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -25,6 +28,14 @@ public:
     QGridLayout *gridMines;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout;
+    QLabel *time;
+    QLabel *label_3;
+    QLabel *flag_count;
+    QLabel *label;
+    QSpacerItem *verticalSpacer;
+    QPushButton *change_difficulty;
+    QPushButton *restart;
 
     void setupUi(QDialog *GameWindow)
     {
@@ -38,7 +49,7 @@ public:
         GameWindow->setSizePolicy(sizePolicy);
         layoutWidget = new QWidget(GameWindow);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 20, 1001, 1051));
+        layoutWidget->setGeometry(QRect(10, 40, 1001, 1051));
         gridMines = new QGridLayout(layoutWidget);
         gridMines->setSpacing(0);
         gridMines->setObjectName(QString::fromUtf8("gridMines"));
@@ -46,10 +57,49 @@ public:
         gridMines->setContentsMargins(0, 0, 0, 0);
         verticalLayoutWidget = new QWidget(GameWindow);
         verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(1010, 20, 271, 1051));
+        verticalLayoutWidget->setGeometry(QRect(1020, 40, 291, 1051));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        time = new QLabel(verticalLayoutWidget);
+        time->setObjectName(QString::fromUtf8("time"));
+
+        gridLayout->addWidget(time, 1, 1, 1, 1);
+
+        label_3 = new QLabel(verticalLayoutWidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        gridLayout->addWidget(label_3, 1, 0, 1, 1);
+
+        flag_count = new QLabel(verticalLayoutWidget);
+        flag_count->setObjectName(QString::fromUtf8("flag_count"));
+
+        gridLayout->addWidget(flag_count, 0, 1, 1, 1);
+
+        label = new QLabel(verticalLayoutWidget);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        gridLayout->addWidget(label, 0, 0, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer, 2, 0, 1, 1);
+
+
+        verticalLayout->addLayout(gridLayout);
+
+        change_difficulty = new QPushButton(verticalLayoutWidget);
+        change_difficulty->setObjectName(QString::fromUtf8("change_difficulty"));
+
+        verticalLayout->addWidget(change_difficulty);
+
+        restart = new QPushButton(verticalLayoutWidget);
+        restart->setObjectName(QString::fromUtf8("restart"));
+
+        verticalLayout->addWidget(restart);
+
 
         retranslateUi(GameWindow);
 
@@ -59,6 +109,24 @@ public:
     void retranslateUi(QDialog *GameWindow)
     {
         GameWindow->setWindowTitle(QCoreApplication::translate("GameWindow", "D\303\251mineur", nullptr));
+        time->setText(QString());
+        label_3->setText(QCoreApplication::translate("GameWindow", "<html>\n"
+"<head/>\n"
+"<body>\n"
+"<p><img src=\":/images/time.png\" width=\"32\"/></p>\n"
+"</body>\n"
+"</html>\n"
+"", nullptr));
+        flag_count->setText(QString());
+        label->setText(QCoreApplication::translate("GameWindow", "<html>\n"
+"<head/>\n"
+"<body>\n"
+"<p><img src=\":/images/flag.png\" width=\"32\" height=\"32\"/></p>\n"
+"</body>\n"
+"</html>\n"
+"", nullptr));
+        change_difficulty->setText(QCoreApplication::translate("GameWindow", "Changer la difficult\303\251", nullptr));
+        restart->setText(QCoreApplication::translate("GameWindow", "Recommencer", nullptr));
     } // retranslateUi
 
 };
