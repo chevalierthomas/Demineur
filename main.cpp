@@ -8,21 +8,21 @@ int main(int argc, char *argv[]) {
 
     GameWindow gameWindow;
     DifficultySelectionDialog* selectionDialog = new DifficultySelectionDialog();
-    CustomDifficultyDialog* customDialog = nullptr; // Reste à nullptr jusqu'à la création
+    CustomDifficultyDialog* customDialog = nullptr; // Initialisé à nullptr jusqu'à la création
 
+    // Connexion pour démarrer le jeu avec des paramètres spécifiques
     QObject::connect(selectionDialog, &DifficultySelectionDialog::gameStartRequested,
                      [&](int width, int height, int mines) {
                          gameWindow.setupGame(width, height, mines);
                          gameWindow.show();
                      });
 
+    // Connexion pour la demande de personnalisation
     QObject::connect(selectionDialog, &DifficultySelectionDialog::customizationRequested,
                      [&]() {
                          if (!customDialog) {
-                             customDialog = new CustomDifficultyDialog();
-                             // Déplacer la connexion à l'intérieur de ce bloc pour s'assurer que customDialog n'est pas nullptr
-                             QObject::connect(customDialog, &QDialog::rejected, selectionDialog, &QDialog::show);
-                             QObject::connect(customDialog, &QDialog::accepted, [&]() {
+                             customDialog = new CustomDifficultyDialog(&gameWindow);
+                             QObject::connect(customDialog, &CustomDifficultyDialog::accepted, [&]() {
                                  int width = customDialog->getWidth();
                                  int height = customDialog->getHeight();
                                  int mines = customDialog->getMines();
@@ -30,11 +30,16 @@ int main(int argc, char *argv[]) {
                                  gameWindow.show();
                              });
                          }
-                         selectionDialog->close(); // Ferme selectionDialog sans supprimer l'instance
-                         customDialog->show(); // Affiche customDialog de manière non modale
+                         customDialog->show();
                      });
 
-    selectionDialog->show(); // Affiche le dialogue de sélection de manière non modale
+    // Connexion pour gérer le changement de difficulté demandé depuis GameWindow
+    QObject::connect(&gameWindow, &GameWindow::changeDifficultyRequested, [&]() {
+        gameWindow.hide();
+        selectionDialog->show();
+    });
+
+    selectionDialog->show();
 
     return app.exec();
 }

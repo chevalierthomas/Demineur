@@ -5,13 +5,20 @@
 #include <QIcon>
 #include <QTime>
 
+int flagsPlaced;
 
-GameWindow::GameWindow(QWidget *parent) : QDialog(parent) {
+GameWindow::GameWindow(QWidget *parent) : QDialog(parent), timer(new QTimer(this)) {
     ui.setupUi(this);
-    // Connectez ici vos boutons "Recommencer" et "Changer de difficulté" si nécessaire
+    connect(ui.change_difficulty, &QPushButton::clicked, this, &GameWindow::changeDifficulty);
+    connect(ui.restart, &QPushButton::clicked, this, &GameWindow::restartGame);
+
+    connect(timer, &QTimer::timeout, this, &GameWindow::updateTimer);
+    // Ne démarrez pas le timer ici. Il sera démarré lors de la première action du joueur.
 }
 
 void GameWindow::setupGame(int width, int height, int mines) {
+
+
     gameWidth = width;
     gameHeight = height;
     totalMines = mines;
@@ -63,6 +70,10 @@ void GameWindow::setupGame(int width, int height, int mines) {
         }
     }
 
+    flagsPlaced = 0; // Réinitialisez le compteur de drapeaux
+    updateFlagCount(); // Mettez à jour l'affichage du compteur de drapeaux
+    gameStarted = false;
+
     generateMines(width, height, mines);
 }
 
@@ -79,6 +90,13 @@ void GameWindow::generateMines(int width, int height, int mines) {
 }
 
 void GameWindow::reveal(int x, int y) {
+
+    if (!gameStarted) {
+        startTime.start(); // Réinitialisez startTime pour commencer le suivi du temps
+        timer->start(1000); // Assurez-vous que le timer se déclenche chaque seconde
+        gameStarted = true; // Marquez le jeu comme ayant commencé
+    }
+
     if (x < 0 || x >= gameWidth || y < 0 || y >= gameHeight || revealedGrid[y][x] || flagGrid[y][x]) return;
 
     revealedGrid[y][x] = true;
@@ -120,20 +138,31 @@ void GameWindow::reveal(int x, int y) {
 
 
 void GameWindow::toggleFlag(int x, int y) {
-    if (revealedGrid[y][x] || (x < 0 || x >= gameWidth || y < 0 || y >= gameHeight)) return;
+    if (revealedGrid[y][x] || x < 0 || x >= gameWidth || y < 0 || y >= gameHeight) {
+        return;
+    }
 
     QPushButton* button = buttonGrid[y][x];
-    if (flagGrid[y][x]) {
-        button->setIcon(QIcon()); // Enlève l'icône du drapeau
-        flagGrid[y][x] = false;
-    } else {
-        button->setIcon(QIcon("./images/flag.png")); // Assurez-vous que le chemin est correct
-        button->setIconSize(QSize(buttonSize - 10, buttonSize - 10)); // Ajustez la taille comme nécessaire
+    // Vérifie si on ajoute un drapeau et s'il reste des drapeaux à placer
+    if (!flagGrid[y][x] && flagsPlaced < totalMines) {
+        button->setIcon(QIcon("./images/flag.png"));
+        button->setIconSize(QSize(buttonSize - 10, buttonSize - 10));
         flagGrid[y][x] = true;
+        flagsPlaced++;
     }
+    // Permet de retirer un drapeau même si le maximum est atteint
+    else if (flagGrid[y][x]) {
+        button->setIcon(QIcon());
+        flagGrid[y][x] = false;
+        flagsPlaced--;
+    }
+    updateFlagCount();
     checkWinCondition();
 }
 
+void GameWindow::updateFlagCount() {
+    ui.flag_count->setText(QString("%1/%2").arg(flagsPlaced).arg(totalMines));
+}
 
 int GameWindow::countAdjacentMines(int x, int y) {
     int count = 0;
@@ -173,4 +202,24 @@ void GameWindow::gameOver(bool win) {
     }
     // Affiche un message de victoire ou de défaite
     QMessageBox::information(this, win ? "Victoire!" : "Défaite", win ? "Vous avez gagné!" : "Vous avez perdu!");
+}
+
+
+void GameWindow::changeDifficulty() {
+    emit changeDifficultyRequested(); // Notifiez le besoin de changer de difficulté
+    // Vous pouvez ici fermer cette fenêtre ou cacher pour revenir à la sélection de difficulté
+    this->close(); // Par exemple, fermer la fenêtre actuelle
+}
+
+void GameWindow::updateTimer() {
+    if (!gameStarted) return; // Ne mettez à jour le temps que si le jeu a commencé
+
+    int elapsedSeconds = startTime.elapsed() / 1000;
+    QTime currentTime(0, 0, 0);
+    currentTime = currentTime.addSecs(elapsedSeconds);
+    ui.time->setText(currentTime.toString("HH:mm:ss"));
+}
+
+void GameWindow::restartGame() {
+    setupGame(gameWidth, gameHeight, totalMines); // Utilisez les paramètres actuels pour redémarrer
 }
