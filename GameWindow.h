@@ -7,6 +7,8 @@
 #include <QTimer>
 #include <QTime>
 #include <QElapsedTimer> // Ajoutez cette ligne ici
+#include <QSoundEffect> // Assurez-vous d'inclure QSoundEffect ici
+
 
 #include "ui_game.h" // Assurez-vous que le nom correspond à votre fichier UI généré
 
@@ -23,12 +25,23 @@ signals:
 
 private:
     Ui::GameWindow ui;
+
+    QSoundEffect clickSoundEffect;
+    QSoundEffect startGameSound;
+    QSoundEffect victorySoundEffect;
+    QSoundEffect defeatSoundEffect;
+
+
     QVector<QVector<QPushButton*>> buttonGrid;
     QVector<QVector<bool>> mineGrid;
     QVector<QVector<bool>> revealedGrid;
     QVector<QVector<bool>> flagGrid;
     int gameWidth, gameHeight, totalMines;
     const int buttonSize = 40; // Définissez ici la taille de vos boutons
+
+
+
+
 
 
     void generateMines(int width, int height, int mines);
@@ -50,9 +63,6 @@ private:
     void clearGame();
 
     bool gameStarted = false; // Ajoutez cette ligne pour suivre si le jeu a commencé
-
-
-    // Ajoutez d'autres méthodes nécessaires ici
 };
 
 #endif // GAMEWINDOW_H

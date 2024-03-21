@@ -3,5 +3,10 @@
         <file>images/flag.png</file>
         <file>images/mine.png</file>
         <file>images/time.png</file>
+        <file>assets/discover-click.wav</file>
+        <file>assets/exit-game.wav</file>
+        <file>assets/click-start-game.wav</file>
+        <file>assets/victory.wav</file>
+        <file>assets/defeat.wav</file>
     </qresource>
 </RCC>

@@ -4,6 +4,9 @@
 #include <QPixmap>
 #include <QIcon>
 #include <QTime>
+#include <QSoundEffect>
+
+#include <iostream>
 
 int flagsPlaced;
 
@@ -13,10 +16,19 @@ GameWindow::GameWindow(QWidget *parent) : QDialog(parent), timer(new QTimer(this
     connect(ui.restart, &QPushButton::clicked, this, &GameWindow::restartGame);
 
     connect(timer, &QTimer::timeout, this, &GameWindow::updateTimer);
+
+    startGameSound.setSource(QUrl("qrc:/assets/click-start-game.wav"));
+    clickSoundEffect.setSource(QUrl("qrc:/assets/discover-click.wav"));
+    victorySoundEffect.setSource(QUrl("qrc:/assets/victory.wav"));
+    defeatSoundEffect.setSource(QUrl("qrc:/assets/defeat.wav"));
+
+
 }
 
 void GameWindow::setupGame(int width, int height, int mines) {
     clearGame();
+
+    startGameSound.play();
 
     gameWidth = width;
     gameHeight = height;
@@ -89,11 +101,15 @@ void GameWindow::generateMines(int width, int height, int mines) {
 }
 
 void GameWindow::reveal(int x, int y) {
+
     if (!gameStarted) {
         startTime.start(); // Commence à suivre le temps dès la première action de l'utilisateur
         timer->start(1000); // Démarre le timer pour se déclencher chaque seconde
         gameStarted = true; // Marque le début du jeu
     }
+
+    clickSoundEffect.play();
+
 
     if (x < 0 || x >= gameWidth || y < 0 || y >= gameHeight || revealedGrid[y][x] || flagGrid[y][x]) {
         return; // Vérifie les conditions de limite et si la case a déjà été révélée ou marquée d'un drapeau
@@ -136,6 +152,7 @@ void GameWindow::reveal(int x, int y) {
             }
         }
     }
+
     checkWinCondition(); // Vérifie si le joueur a gagné après chaque révélation
 }
 
@@ -203,9 +220,16 @@ void GameWindow::gameOver(bool win) {
             }
         }
     }
-    // Affiche un message de victoire ou de défaite
-    QMessageBox::information(this, win ? "Victoire!" : "Défaite", win ? "Vous avez gagné!" : "Vous avez perdu!");
+
+    if (win) {
+        victorySoundEffect.play(); // Joue le son de victoire
+        QMessageBox::information(this, "Victoire!", "Vous avez gagné!");
+    } else {
+        defeatSoundEffect.play(); // Joue le son de défaite
+        QMessageBox::information(this, "Défaite", "Vous avez perdu!");
+    }
 }
+
 
 
 void GameWindow::changeDifficulty() {
