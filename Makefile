@@ -158,7 +158,7 @@ TARGET        = DemineurApp
 first: all
 ####### Build rules
 
-DemineurApp: ui_choose_difficulty.h ui_dialog.h ui_free_difficulty.h ui_game.h $(OBJECTS)  
+DemineurApp: ui_choose_difficulty.h ui_free_difficulty.h ui_game.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: Demineur.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -338,7 +338,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents DifficultySelectionDialog.h CustomDifficultyDialog.h GameWindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp DifficultySelectionDialog.cpp CustomDifficultyDialog.cpp GameWindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents choose_difficulty.ui dialog.ui free_difficulty.ui game.ui $(DISTDIR)/
+	$(COPY_FILE) --parents choose_difficulty.ui free_difficulty.ui game.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -402,16 +402,12 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_choose_difficulty.h ui_dialog.h ui_free_difficulty.h ui_game.h
+compiler_uic_make_all: ui_choose_difficulty.h ui_free_difficulty.h ui_game.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_choose_difficulty.h ui_dialog.h ui_free_difficulty.h ui_game.h
+	-$(DEL_FILE) ui_choose_difficulty.h ui_free_difficulty.h ui_game.h
 ui_choose_difficulty.h: choose_difficulty.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic choose_difficulty.ui -o ui_choose_difficulty.h
-
-ui_dialog.h: dialog.ui \
-		/usr/lib/qt5/bin/uic
-	/usr/lib/qt5/bin/uic dialog.ui -o ui_dialog.h
 
 ui_free_difficulty.h: free_difficulty.ui \
 		/usr/lib/qt5/bin/uic

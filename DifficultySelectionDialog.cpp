@@ -1,6 +1,9 @@
 #include "DifficultySelectionDialog.h"
 #include <QApplication>
 
+#include <iostream>
+
+
 DifficultySelectionDialog::DifficultySelectionDialog(QWidget *parent) : QDialog(parent) {
     ui.setupUi(this);
 
@@ -29,6 +32,8 @@ void DifficultySelectionDialog::onHardGameSelected() {
 }
 
 void DifficultySelectionDialog::onCustomizationSelected() {
+    std::cout << "MIAOU MIAOU" << std::endl;
+
     emit customizationRequested();
-    accept(); // Ferme la boîte de dialogue
+    //accept(); // Ferme la boîte de dialogue
 }

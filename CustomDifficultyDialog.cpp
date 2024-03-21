@@ -1,6 +1,7 @@
 #include "CustomDifficultyDialog.h"
 
 CustomDifficultyDialog::CustomDifficultyDialog(QWidget *parent) : QDialog(parent) {
+
     ui.setupUi(this);
 
     // Définition des valeurs initiales pour les QSpinBox

@@ -49,7 +49,7 @@ public:
         GameWindow->setSizePolicy(sizePolicy);
         layoutWidget = new QWidget(GameWindow);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 40, 1001, 1051));
+        layoutWidget->setGeometry(QRect(10, 10, 1051, 1081));
         gridMines = new QGridLayout(layoutWidget);
         gridMines->setSpacing(0);
         gridMines->setObjectName(QString::fromUtf8("gridMines"));
@@ -57,7 +57,7 @@ public:
         gridMines->setContentsMargins(0, 0, 0, 0);
         verticalLayoutWidget = new QWidget(GameWindow);
         verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(1020, 40, 291, 1051));
+        verticalLayoutWidget->setGeometry(QRect(1070, 10, 241, 1081));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -113,7 +113,7 @@ public:
         label_3->setText(QCoreApplication::translate("GameWindow", "<html>\n"
 "<head/>\n"
 "<body>\n"
-"<p><img src=\":/images/time.png\" width=\"32\"/></p>\n"
+"<p><img src=\":/images/time.png\" width=\"40\"/></p>\n"
 "</body>\n"
 "</html>\n"
 "", nullptr));
@@ -121,7 +121,7 @@ public:
         label->setText(QCoreApplication::translate("GameWindow", "<html>\n"
 "<head/>\n"
 "<body>\n"
-"<p><img src=\":/images/flag.png\" width=\"32\" height=\"32\"/></p>\n"
+"<p><img src=\":/images/flag.png\" width=\"40\" height=\"40\"/></p>\n"
 "</body>\n"
 "</html>\n"
 "", nullptr));

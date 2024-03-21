@@ -1,4 +1,4 @@
-QT       += core gui widgets
+QT += core gui widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,7 +15,6 @@ HEADERS  += DifficultySelectionDialog.h \
             GameWindow.h
 
 FORMS    += choose_difficulty.ui \
-            dialog.ui \
             free_difficulty.ui \
             game.ui
 

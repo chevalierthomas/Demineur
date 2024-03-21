@@ -13,7 +13,6 @@ GameWindow::GameWindow(QWidget *parent) : QDialog(parent), timer(new QTimer(this
     connect(ui.restart, &QPushButton::clicked, this, &GameWindow::restartGame);
 
     connect(timer, &QTimer::timeout, this, &GameWindow::updateTimer);
-    // Ne démarrez pas le timer ici. Il sera démarré lors de la première action du joueur.
 }
 
 void GameWindow::setupGame(int width, int height, int mines) {
@@ -90,51 +89,55 @@ void GameWindow::generateMines(int width, int height, int mines) {
 }
 
 void GameWindow::reveal(int x, int y) {
-
     if (!gameStarted) {
-        startTime.start(); // Réinitialisez startTime pour commencer le suivi du temps
-        timer->start(1000); // Assurez-vous que le timer se déclenche chaque seconde
-        gameStarted = true; // Marquez le jeu comme ayant commencé
+        startTime.start(); // Commence à suivre le temps dès la première action de l'utilisateur
+        timer->start(1000); // Démarre le timer pour se déclencher chaque seconde
+        gameStarted = true; // Marque le début du jeu
     }
 
-    if (x < 0 || x >= gameWidth || y < 0 || y >= gameHeight || revealedGrid[y][x] || flagGrid[y][x]) return;
+    if (x < 0 || x >= gameWidth || y < 0 || y >= gameHeight || revealedGrid[y][x] || flagGrid[y][x]) {
+        return; // Vérifie les conditions de limite et si la case a déjà été révélée ou marquée d'un drapeau
+    }
 
-    revealedGrid[y][x] = true;
+    revealedGrid[y][x] = true; // Marque la case comme révélée
     QPushButton* button = buttonGrid[y][x];
 
     if (mineGrid[y][x]) {
-        // Si le joueur clique sur une mine, on révèle la mine et on termine le jeu avec une défaite.
-        button->setIcon(QIcon("./images/mine.png"));
-        button->setIconSize(QSize(buttonSize - 10, buttonSize - 10));
-        gameOver(false); // Arrête immédiatement le jeu et affiche le message de défaite.
+        // Le joueur a cliqué sur une mine
+        button->setIcon(QIcon("./images/mine.png")); // Affiche une icône de mine
+        button->setIconSize(QSize(buttonSize - 10, buttonSize - 10)); // Ajuste la taille de l'icône
+        gameOver(false); // Termine le jeu avec une défaite
         return;
     }
 
-    // Si ce n'est pas une mine, continuez avec la logique existante.
-    button->setEnabled(false);
-    int adjacentMines = countAdjacentMines(x, y);
+    // Pas une mine, procède à la logique de révélation
+    button->setEnabled(false); // Désactive le bouton pour empêcher d'autres clics
+
+    int adjacentMines = countAdjacentMines(x, y); // Compte les mines adjacentes
     if (adjacentMines > 0) {
+        // Affiche le nombre de mines adjacentes sur le bouton
         button->setText(QString::number(adjacentMines));
         QString color;
+        // Sélectionne une couleur basée sur le nombre de mines adjacentes
         switch (adjacentMines) {
-        case 1: color = "blue"; break;
-        case 2: color = "green"; break;
-        case 3: color = "red"; break;
-        // Ajoutez plus de cas selon le besoin
-        default: color = "black"; break;
+            case 1: color = "blue"; break;
+            case 2: color = "green"; break;
+            case 3: color = "red"; break;
+            // Ajoutez d'autres couleurs au besoin
+            default: color = "black"; break;
         }
         button->setStyleSheet("color: " + color + "; font-weight: bold; font-size: 16px;");
     } else {
-        // Logique pour révéler les cases adjacentes si nécessaire.
+        // Aucune mine adjacente, révèle récursivement les cases adjacentes
+        button->setStyleSheet("background-color: #c06c84;"); // Modifie la couleur de fond pour les cases sûres
         for (int dx = -1; dx <= 1; ++dx) {
             for (int dy = -1; dy <= 1; ++dy) {
-                if (dx != 0 || dy != 0) reveal(x + dx, y + dy);
+                if (dx != 0 || dy != 0) reveal(x + dx, y + dy); // Révélation récursive
             }
         }
     }
-    checkWinCondition();
+    checkWinCondition(); // Vérifie si le joueur a gagné après chaque révélation
 }
-
 
 
 void GameWindow::toggleFlag(int x, int y) {
