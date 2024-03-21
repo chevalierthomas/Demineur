@@ -47,6 +47,7 @@ private:
     QElapsedTimer startTime;
 
     void updateTimer(); // Slot pour mettre à jour le chronomètre chaque seconde
+    void clearGame();
 
     bool gameStarted = false; // Ajoutez cette ligne pour suivre si le jeu a commencé
 

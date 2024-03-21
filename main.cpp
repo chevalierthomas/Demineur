@@ -2,7 +2,6 @@
 #include "DifficultySelectionDialog.h"
 #include "CustomDifficultyDialog.h"
 #include "GameWindow.h"
-#include <iostream>
 
 
 int main(int argc, char *argv[]) {
@@ -14,6 +13,7 @@ int main(int argc, char *argv[]) {
 
     QObject::connect(&selectionDialog, &DifficultySelectionDialog::gameStartRequested,
                      [&gameWindow](int width, int height, int mines) {
+
                          gameWindow.setupGame(width, height, mines);
                          gameWindow.show();
                      });
@@ -23,7 +23,6 @@ int main(int argc, char *argv[]) {
                      [customDialog, &selectionDialog]() {
                          selectionDialog.hide();
                          customDialog->show(); // Affiche directement le dialogue
-                         std::cout << "Ceci est un message dans la console." << std::endl;
 
                      });
 

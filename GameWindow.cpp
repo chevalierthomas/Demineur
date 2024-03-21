@@ -16,7 +16,7 @@ GameWindow::GameWindow(QWidget *parent) : QDialog(parent), timer(new QTimer(this
 }
 
 void GameWindow::setupGame(int width, int height, int mines) {
-
+    clearGame();
 
     gameWidth = width;
     gameHeight = height;
@@ -226,3 +226,29 @@ void GameWindow::updateTimer() {
 void GameWindow::restartGame() {
     setupGame(gameWidth, gameHeight, totalMines); // Utilisez les paramètres actuels pour redémarrer
 }
+
+void GameWindow::clearGame() {
+    // Arrête le timer s'il est en cours d'exécution
+    timer->stop();
+
+    // Nettoie les grilles et réinitialise les compteurs
+    for (int y = 0; y < gameHeight; ++y) {
+        for (int x = 0; x < gameWidth; ++x) {
+            // Supprime le bouton de la grille actuelle
+            delete buttonGrid[y][x];
+        }
+    }
+
+    // Efface et réinitialise les vecteurs pour les grilles
+    buttonGrid.clear();
+    mineGrid.clear();
+    revealedGrid.clear();
+    flagGrid.clear();
+
+    // Réinitialise les compteurs et les états
+    flagsPlaced = 0;
+    gameStarted = false;
+
+    // Optionnel: réinitialise d'autres états et compteurs ici
+}
+
