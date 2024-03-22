@@ -85,7 +85,6 @@ void GameWindow::setupGame(int width, int height, int mines) {
     generateMines(width, height, mines);
 }
 
-
 void GameWindow::generateMines(int width, int height, int mines) {
     while (mines > 0) {
         int x = QRandomGenerator::global()->bounded(width);
@@ -152,7 +151,6 @@ void GameWindow::reveal(int x, int y) {
 
     checkWinCondition(); // Vérifie si le joueur a gagné après chaque révélation
 }
-
 
 void GameWindow::toggleFlag(int x, int y) {
     if (revealedGrid[y][x] || x < 0 || x >= gameWidth || y < 0 || y >= gameHeight) {
@@ -226,8 +224,6 @@ void GameWindow::gameOver(bool win) {
         QMessageBox::information(this, "Défaite", "Vous avez perdu!");
     }
 }
-
-
 
 void GameWindow::changeDifficulty() {
     emit changeDifficultyRequested(); // Notifiez le besoin de changer de difficulté
