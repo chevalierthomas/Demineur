@@ -2,6 +2,8 @@
 #define DIFFICULTYSELECTIONDIALOG_H
 
 #include <QDialog>
+#include <QSoundEffect> // Assurez-vous d'inclure QSoundEffect ici
+
 #include "ui_choose_difficulty.h" // Généré depuis choose_difficulty.ui
 
 class DifficultySelectionDialog : public QDialog {
@@ -19,9 +21,14 @@ private slots:
     void onMediumGameSelected();
     void onHardGameSelected();
     void onCustomizationSelected();
+    void onExitRequested();
+
 
 private:
     Ui::ChooseDifficultyDialog ui; // Assurez-vous que le nom Ui::Demineur correspond à celui défini dans votre fichier .ui
+    QSoundEffect exitGameSoundEffect;
+
+
 };
 
 #endif // DIFFICULTYSELECTIONDIALOG_H

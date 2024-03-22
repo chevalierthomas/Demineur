@@ -29,11 +29,11 @@ public:
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
     QGridLayout *gridLayout;
-    QLabel *time;
-    QLabel *label_3;
     QLabel *flag_count;
-    QLabel *label;
+    QLabel *label_3;
+    QLabel *time;
     QSpacerItem *verticalSpacer;
+    QLabel *label;
     QPushButton *change_difficulty;
     QPushButton *restart;
 
@@ -63,29 +63,29 @@ public:
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        time = new QLabel(verticalLayoutWidget);
-        time->setObjectName(QString::fromUtf8("time"));
+        flag_count = new QLabel(verticalLayoutWidget);
+        flag_count->setObjectName(QString::fromUtf8("flag_count"));
 
-        gridLayout->addWidget(time, 1, 1, 1, 1);
+        gridLayout->addWidget(flag_count, 0, 1, 1, 1);
 
         label_3 = new QLabel(verticalLayoutWidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
         gridLayout->addWidget(label_3, 1, 0, 1, 1);
 
-        flag_count = new QLabel(verticalLayoutWidget);
-        flag_count->setObjectName(QString::fromUtf8("flag_count"));
+        time = new QLabel(verticalLayoutWidget);
+        time->setObjectName(QString::fromUtf8("time"));
 
-        gridLayout->addWidget(flag_count, 0, 1, 1, 1);
+        gridLayout->addWidget(time, 1, 1, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer, 2, 0, 1, 1);
 
         label = new QLabel(verticalLayoutWidget);
         label->setObjectName(QString::fromUtf8("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout->addItem(verticalSpacer, 2, 0, 1, 1);
 
 
         verticalLayout->addLayout(gridLayout);
@@ -109,7 +109,7 @@ public:
     void retranslateUi(QDialog *GameWindow)
     {
         GameWindow->setWindowTitle(QCoreApplication::translate("GameWindow", "D\303\251mineur", nullptr));
-        time->setText(QString());
+        flag_count->setText(QString());
         label_3->setText(QCoreApplication::translate("GameWindow", "<html>\n"
 "<head/>\n"
 "<body>\n"
@@ -117,7 +117,7 @@ public:
 "</body>\n"
 "</html>\n"
 "", nullptr));
-        flag_count->setText(QString());
+        time->setText(QString());
         label->setText(QCoreApplication::translate("GameWindow", "<html>\n"
 "<head/>\n"
 "<body>\n"

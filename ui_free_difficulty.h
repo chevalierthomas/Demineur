@@ -135,7 +135,7 @@ public:
         label->setText(QCoreApplication::translate("CustomDifficultyDialog", "Personnaliser", nullptr));
         label_3->setText(QCoreApplication::translate("CustomDifficultyDialog", "Hauteur", nullptr));
         label_2->setText(QCoreApplication::translate("CustomDifficultyDialog", "Largeur", nullptr));
-        label_4->setText(QCoreApplication::translate("CustomDifficultyDialog", "Pourcentage de Mine", nullptr));
+        label_4->setText(QCoreApplication::translate("CustomDifficultyDialog", "Mine", nullptr));
         validateButton->setText(QCoreApplication::translate("CustomDifficultyDialog", "D\303\251mmarer le jeu", nullptr));
         cancelButton->setText(QCoreApplication::translate("CustomDifficultyDialog", "Annuler", nullptr));
     } // retranslateUi

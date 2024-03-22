@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DifficultySelectionDialog_t {
-    QByteArrayData data[11];
-    char stringdata0[175];
+    QByteArrayData data[12];
+    char stringdata0[191];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,13 +42,15 @@ QT_MOC_LITERAL(6, 65, 22), // "customizationRequested"
 QT_MOC_LITERAL(7, 88, 22), // "onStandardGameSelected"
 QT_MOC_LITERAL(8, 111, 20), // "onMediumGameSelected"
 QT_MOC_LITERAL(9, 132, 18), // "onHardGameSelected"
-QT_MOC_LITERAL(10, 151, 23) // "onCustomizationSelected"
+QT_MOC_LITERAL(10, 151, 23), // "onCustomizationSelected"
+QT_MOC_LITERAL(11, 175, 15) // "onExitRequested"
 
     },
     "DifficultySelectionDialog\0gameStartRequested\0"
     "\0width\0height\0mines\0customizationRequested\0"
     "onStandardGameSelected\0onMediumGameSelected\0"
-    "onHardGameSelected\0onCustomizationSelected"
+    "onHardGameSelected\0onCustomizationSelected\0"
+    "onExitRequested"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,7 +60,7 @@ static const uint qt_meta_data_DifficultySelectionDialog[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -66,20 +68,22 @@ static const uint qt_meta_data_DifficultySelectionDialog[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    3,   44,    2, 0x06 /* Public */,
-       6,    0,   51,    2, 0x06 /* Public */,
+       1,    3,   49,    2, 0x06 /* Public */,
+       6,    0,   56,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    0,   52,    2, 0x08 /* Private */,
-       8,    0,   53,    2, 0x08 /* Private */,
-       9,    0,   54,    2, 0x08 /* Private */,
-      10,    0,   55,    2, 0x08 /* Private */,
+       7,    0,   57,    2, 0x08 /* Private */,
+       8,    0,   58,    2, 0x08 /* Private */,
+       9,    0,   59,    2, 0x08 /* Private */,
+      10,    0,   60,    2, 0x08 /* Private */,
+      11,    0,   61,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int,    3,    4,    5,
     QMetaType::Void,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -100,6 +104,7 @@ void DifficultySelectionDialog::qt_static_metacall(QObject *_o, QMetaObject::Cal
         case 3: _t->onMediumGameSelected(); break;
         case 4: _t->onHardGameSelected(); break;
         case 5: _t->onCustomizationSelected(); break;
+        case 6: _t->onExitRequested(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -150,13 +155,13 @@ int DifficultySelectionDialog::qt_metacall(QMetaObject::Call _c, int _id, void *
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

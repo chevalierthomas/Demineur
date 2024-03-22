@@ -1,7 +1,7 @@
 #include "DifficultySelectionDialog.h"
 #include <QApplication>
-
-#include <iostream>
+#include <QSoundEffect> // Assurez-vous d'inclure QSoundEffect ici
+#include <QMessageBox>
 
 
 DifficultySelectionDialog::DifficultySelectionDialog(QWidget *parent) : QDialog(parent) {
@@ -12,8 +12,9 @@ DifficultySelectionDialog::DifficultySelectionDialog(QWidget *parent) : QDialog(
     connect(ui.schema_30_16, &QPushButton::clicked, this, &DifficultySelectionDialog::onHardGameSelected);
     connect(ui.schema_free, &QPushButton::clicked, this, &DifficultySelectionDialog::onCustomizationSelected);
 
-    // Corrigez la connexion pour le bouton Exit
-    connect(ui.exitButton, &QPushButton::clicked, QApplication::instance(), &QApplication::quit);
+    exitGameSoundEffect.setSource(QUrl("qrc:/assets/exit-game.wav"));
+
+    connect(ui.exitButton, &QPushButton::clicked, this, &DifficultySelectionDialog::onExitRequested);
 }
 
 void DifficultySelectionDialog::onStandardGameSelected() {
@@ -32,8 +33,19 @@ void DifficultySelectionDialog::onHardGameSelected() {
 }
 
 void DifficultySelectionDialog::onCustomizationSelected() {
-    std::cout << "MIAOU MIAOU" << std::endl;
 
     emit customizationRequested();
     //accept(); // Ferme la boîte de dialogue
+}
+
+void DifficultySelectionDialog::onExitRequested() {
+    exitGameSoundEffect.play(); // Joue le son de sortie
+
+    // Afficher une boîte de dialogue de confirmation
+    QMessageBox::StandardButton reply = QMessageBox::question(this, "Quitter", "Êtes-vous sûr de vouloir quitter ?",
+                                                              QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        QApplication::quit();
+    }
 }

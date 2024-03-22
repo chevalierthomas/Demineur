@@ -5,7 +5,6 @@
 #include <QIcon>
 #include <QTime>
 #include <QSoundEffect>
-
 #include <iostream>
 
 int flagsPlaced;
@@ -21,7 +20,6 @@ GameWindow::GameWindow(QWidget *parent) : QDialog(parent), timer(new QTimer(this
     clickSoundEffect.setSource(QUrl("qrc:/assets/discover-click.wav"));
     victorySoundEffect.setSource(QUrl("qrc:/assets/victory.wav"));
     defeatSoundEffect.setSource(QUrl("qrc:/assets/defeat.wav"));
-
 
 }
 
@@ -81,7 +79,6 @@ void GameWindow::setupGame(int width, int height, int mines) {
         }
     }
 
-    flagsPlaced = 0; // Réinitialisez le compteur de drapeaux
     updateFlagCount(); // Mettez à jour l'affichage du compteur de drapeaux
     gameStarted = false;
 
@@ -272,6 +269,9 @@ void GameWindow::clearGame() {
     // Réinitialise les compteurs et les états
     flagsPlaced = 0;
     gameStarted = false;
+
+    ui.time->setText("");
+
 
     // Optionnel: réinitialise d'autres états et compteurs ici
 }
