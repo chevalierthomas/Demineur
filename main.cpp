@@ -3,28 +3,33 @@
 #include "CustomDifficultyDialog.h"
 #include "GameWindow.h"
 
-
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    DifficultySelectionDialog selectionDialog; // Création en premier
-    GameWindow gameWindow(&selectionDialog); // Passez selectionDialog à gameWindow
+    // Initialize selectionDialog before it's used.
+    DifficultySelectionDialog* selectionDialog = new DifficultySelectionDialog(nullptr); // Assuming no parent
 
-    CustomDifficultyDialog* customDialog = new CustomDifficultyDialog(&selectionDialog); // Création immédiate avec le parent correct
+    // Now that selectionDialog is defined, pass it to the GameWindow constructor.
+    GameWindow gameWindow(selectionDialog);
 
-    QObject::connect(&selectionDialog, &DifficultySelectionDialog::gameStartRequested,
-                     [&gameWindow](int width, int height, int mines) {
+    // customDialog is correctly created with selectionDialog as its parent.
+    CustomDifficultyDialog* customDialog = new CustomDifficultyDialog(selectionDialog);
 
+    QObject::connect(customDialog, &CustomDifficultyDialog::cancelClicked, [selectionDialog]() {
+        selectionDialog->show(); // Show the DifficultySelectionDialog again.
+    });
+
+    QObject::connect(selectionDialog, &DifficultySelectionDialog::gameStartRequested,
+                     [&gameWindow, selectionDialog](int width, int height, int mines) {
+                         selectionDialog->hide();
                          gameWindow.setupGame(width, height, mines);
                          gameWindow.show();
                      });
 
-    // Simplification de la connexion pour l'affichage du dialogue personnalisé
-    QObject::connect(&selectionDialog, &DifficultySelectionDialog::customizationRequested,
-                     [customDialog, &selectionDialog]() {
-                         selectionDialog.hide();
-                         customDialog->show(); // Affiche directement le dialogue
-
+    QObject::connect(selectionDialog, &DifficultySelectionDialog::customizationRequested,
+                     [customDialog, selectionDialog]() {
+                         selectionDialog->hide();
+                         customDialog->show(); // Show CustomDifficultyDialog directly.
                      });
 
     QObject::connect(customDialog, &CustomDifficultyDialog::accepted,
@@ -37,12 +42,12 @@ int main(int argc, char *argv[]) {
                      });
 
     QObject::connect(&gameWindow, &GameWindow::changeDifficultyRequested,
-                     [&gameWindow, &selectionDialog]() {
+                     [&gameWindow, selectionDialog]() {
                          gameWindow.hide();
-                         selectionDialog.show();
+                         selectionDialog->show(); // Return to DifficultySelectionDialog.
                      });
 
-    selectionDialog.show(); // Affiche le dialogue de sélection
+    selectionDialog->show(); // Initially show the DifficultySelectionDialog.
 
     return app.exec();
 }

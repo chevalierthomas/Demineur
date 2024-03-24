@@ -15,6 +15,9 @@ public:
     int getHeight() const;
     int getMines() const;
 
+signals:
+    void cancelClicked();
+
 private:
     Ui::CustomDifficultyDialog ui; // Utilisez le bon espace de noms UI généré par votre fichier .ui
 };

@@ -11,7 +11,11 @@ CustomDifficultyDialog::CustomDifficultyDialog(QWidget *parent) : QDialog(parent
 
     // Connexion des signaux et des slots
     connect(ui.validateButton, &QPushButton::clicked, this, &CustomDifficultyDialog::accept);
-    connect(ui.cancelButton, &QPushButton::clicked, this, &CustomDifficultyDialog::reject);
+    //connect(ui.cancelButton, &QPushButton::clicked, this, &CustomDifficultyDialog::reject);
+    connect(ui.cancelButton, &QPushButton::clicked, this, [this]() {
+        emit cancelClicked(); // Emit the cancelClicked signal when the button is clicked.
+        this->reject(); // Optionally, close the dialog.
+    });
 }
 
 int CustomDifficultyDialog::getWidth() const {

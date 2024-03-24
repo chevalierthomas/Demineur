@@ -42,17 +42,14 @@ void DifficultySelectionDialog::updateSoundButtonIcon() {
 
 void DifficultySelectionDialog::onStandardGameSelected() {
     emit gameStartRequested(8, 8, 10);
-    accept();
 }
 
 void DifficultySelectionDialog::onMediumGameSelected() {
     emit gameStartRequested(16, 16, 40); // Paramètres pour le niveau moyen
-    accept();
 }
 
 void DifficultySelectionDialog::onHardGameSelected() {
     emit gameStartRequested(30, 16, 99); // Paramètres pour le niveau difficile
-    accept();
 }
 
 void DifficultySelectionDialog::onCustomizationSelected() {
