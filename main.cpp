@@ -7,8 +7,9 @@
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    GameWindow gameWindow;
-    DifficultySelectionDialog selectionDialog; // Utilisation d'une instance sur la pile
+    DifficultySelectionDialog selectionDialog; // Création en premier
+    GameWindow gameWindow(&selectionDialog); // Passez selectionDialog à gameWindow
+
     CustomDifficultyDialog* customDialog = new CustomDifficultyDialog(&selectionDialog); // Création immédiate avec le parent correct
 
     QObject::connect(&selectionDialog, &DifficultySelectionDialog::gameStartRequested,

@@ -11,6 +11,7 @@ class DifficultySelectionDialog : public QDialog {
 
 public:
     explicit DifficultySelectionDialog(QWidget *parent = nullptr);
+    bool isSoundEnabled() const { return soundEnabled; }
 
 signals:
     void gameStartRequested(int width, int height, int mines);
@@ -22,13 +23,14 @@ private slots:
     void onHardGameSelected();
     void onCustomizationSelected();
     void onExitRequested();
-
+    void onToggleSound(); // Ajoutez cette ligne
 
 private:
-    Ui::ChooseDifficultyDialog ui; // Assurez-vous que le nom Ui::Demineur correspond à celui défini dans votre fichier .ui
+    Ui::ChooseDifficultyDialog ui;
     QSoundEffect exitGameSoundEffect;
+    bool soundEnabled = true; // Ajoutez cette ligne pour suivre l'état du son
 
-
+    void updateSoundButtonIcon(); // Méthode pour mettre à jour l'icône du bouton son
 };
 
 #endif // DIFFICULTYSELECTIONDIALOG_H

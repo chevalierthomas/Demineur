@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'choose_difficulty.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.3
+** Created by: Qt User Interface Compiler version 5.15.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,11 @@
 #define UI_CHOOSE_DIFFICULTY_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
@@ -25,7 +27,9 @@ class Ui_ChooseDifficultyDialog
 public:
     QWidget *verticalLayoutWidget_2;
     QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *headerLayout;
     QLabel *label;
+    QPushButton *soundButton;
     QGridLayout *gridLayout;
     QPushButton *schema_30_16;
     QPushButton *schema_free;
@@ -47,16 +51,31 @@ public:
         verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_2);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(20, 10, 20, 10);
+        headerLayout = new QHBoxLayout();
+        headerLayout->setObjectName(QString::fromUtf8("headerLayout"));
         label = new QLabel(verticalLayoutWidget_2);
         label->setObjectName(QString::fromUtf8("label"));
         QFont font;
         font.setPointSize(20);
         font.setBold(true);
-        font.setWeight(75);
         label->setFont(font);
         label->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_2->addWidget(label);
+        headerLayout->addWidget(label);
+
+        soundButton = new QPushButton(verticalLayoutWidget_2);
+        soundButton->setObjectName(QString::fromUtf8("soundButton"));
+        soundButton->setStyleSheet(QString::fromUtf8("\n"
+"QPushButton { max-width: 40px; max-height: 40px; }\n"
+""));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("images/sound-off.png"), QSize(), QIcon::Normal, QIcon::Off);
+        soundButton->setIcon(icon);
+
+        headerLayout->addWidget(soundButton);
+
+
+        verticalLayout_2->addLayout(headerLayout);
 
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(50);

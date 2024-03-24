@@ -4,7 +4,7 @@
 #include <QMessageBox>
 
 
-DifficultySelectionDialog::DifficultySelectionDialog(QWidget *parent) : QDialog(parent) {
+DifficultySelectionDialog::DifficultySelectionDialog(QWidget *parent) : QDialog(parent), soundEnabled(true) {
     ui.setupUi(this);
 
     connect(ui.schema_8_8, &QPushButton::clicked, this, &DifficultySelectionDialog::onStandardGameSelected);
@@ -15,7 +15,30 @@ DifficultySelectionDialog::DifficultySelectionDialog(QWidget *parent) : QDialog(
     exitGameSoundEffect.setSource(QUrl("qrc:/assets/exit-game.wav"));
 
     connect(ui.exitButton, &QPushButton::clicked, this, &DifficultySelectionDialog::onExitRequested);
+
+    connect(ui.soundButton, &QPushButton::clicked, this, &DifficultySelectionDialog::onToggleSound);
+
+    updateSoundButtonIcon(); // Assurez-vous que l'icône initiale est correcte
 }
+
+void DifficultySelectionDialog::onToggleSound() {
+    soundEnabled = !soundEnabled; // Basculer l'état du son
+    updateSoundButtonIcon(); // Mettre à jour l'icône du bouton
+
+    // Ici, vous pouvez également activer/désactiver les effets sonores globalement si nécessaire
+}
+
+void DifficultySelectionDialog::updateSoundButtonIcon() {
+    QSize iconSize(24, 24); // Vous pouvez ajuster la taille selon vos besoins
+    ui.soundButton->setIconSize(iconSize);
+
+    if (soundEnabled) {
+        ui.soundButton->setIcon(QIcon(":/images/sound-on.png"));
+    } else {
+        ui.soundButton->setIcon(QIcon(":/images/sound-off.png"));
+    }
+}
+
 
 void DifficultySelectionDialog::onStandardGameSelected() {
     emit gameStartRequested(8, 8, 10);
@@ -39,7 +62,9 @@ void DifficultySelectionDialog::onCustomizationSelected() {
 }
 
 void DifficultySelectionDialog::onExitRequested() {
-    exitGameSoundEffect.play(); // Joue le son de sortie
+    if (soundEnabled){
+        exitGameSoundEffect.play(); // Joue le son de sortie
+    }
 
     // Afficher une boîte de dialogue de confirmation
     QMessageBox::StandardButton reply = QMessageBox::question(this, "Quitter", "Êtes-vous sûr de vouloir quitter ?",

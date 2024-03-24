@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'game.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.3
+** Created by: Qt User Interface Compiler version 5.15.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -13,8 +13,10 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -24,81 +26,87 @@ QT_BEGIN_NAMESPACE
 class Ui_GameWindow
 {
 public:
-    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout_WholeWindow;
+    QScrollArea *gameAreaScroll;
+    QWidget *scrollAreaWidgetContents;
     QGridLayout *gridMines;
-    QWidget *verticalLayoutWidget;
-    QVBoxLayout *verticalLayout;
-    QGridLayout *gridLayout;
-    QLabel *flag_count;
-    QLabel *label_3;
-    QLabel *time;
-    QSpacerItem *verticalSpacer;
-    QLabel *label;
+    QHBoxLayout *horizontalLayout_Controls;
     QPushButton *change_difficulty;
     QPushButton *restart;
+    QSpacerItem *horizontalSpacer;
+    QLabel *labelFlagIcon;
+    QLabel *flag_count;
+    QLabel *labelTimeIcon;
+    QLabel *time;
 
     void setupUi(QDialog *GameWindow)
     {
         if (GameWindow->objectName().isEmpty())
             GameWindow->setObjectName(QString::fromUtf8("GameWindow"));
-        GameWindow->resize(1320, 1099);
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        verticalLayout_WholeWindow = new QVBoxLayout(GameWindow);
+        verticalLayout_WholeWindow->setObjectName(QString::fromUtf8("verticalLayout_WholeWindow"));
+        gameAreaScroll = new QScrollArea(GameWindow);
+        gameAreaScroll->setObjectName(QString::fromUtf8("gameAreaScroll"));
+        gameAreaScroll->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(GameWindow->sizePolicy().hasHeightForWidth());
-        GameWindow->setSizePolicy(sizePolicy);
-        layoutWidget = new QWidget(GameWindow);
-        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 10, 1051, 1081));
-        gridMines = new QGridLayout(layoutWidget);
-        gridMines->setSpacing(0);
+        sizePolicy.setHeightForWidth(scrollAreaWidgetContents->sizePolicy().hasHeightForWidth());
+        scrollAreaWidgetContents->setSizePolicy(sizePolicy);
+        gridMines = new QGridLayout(scrollAreaWidgetContents);
         gridMines->setObjectName(QString::fromUtf8("gridMines"));
-        gridMines->setSizeConstraint(QLayout::SetNoConstraint);
-        gridMines->setContentsMargins(0, 0, 0, 0);
-        verticalLayoutWidget = new QWidget(GameWindow);
-        verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(1070, 10, 241, 1081));
-        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        flag_count = new QLabel(verticalLayoutWidget);
-        flag_count->setObjectName(QString::fromUtf8("flag_count"));
+        gameAreaScroll->setWidget(scrollAreaWidgetContents);
 
-        gridLayout->addWidget(flag_count, 0, 1, 1, 1);
+        verticalLayout_WholeWindow->addWidget(gameAreaScroll);
 
-        label_3 = new QLabel(verticalLayoutWidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        gridLayout->addWidget(label_3, 1, 0, 1, 1);
-
-        time = new QLabel(verticalLayoutWidget);
-        time->setObjectName(QString::fromUtf8("time"));
-
-        gridLayout->addWidget(time, 1, 1, 1, 1);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout->addItem(verticalSpacer, 2, 0, 1, 1);
-
-        label = new QLabel(verticalLayoutWidget);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        gridLayout->addWidget(label, 0, 0, 1, 1);
-
-
-        verticalLayout->addLayout(gridLayout);
-
-        change_difficulty = new QPushButton(verticalLayoutWidget);
+        horizontalLayout_Controls = new QHBoxLayout();
+        horizontalLayout_Controls->setObjectName(QString::fromUtf8("horizontalLayout_Controls"));
+        change_difficulty = new QPushButton(GameWindow);
         change_difficulty->setObjectName(QString::fromUtf8("change_difficulty"));
 
-        verticalLayout->addWidget(change_difficulty);
+        horizontalLayout_Controls->addWidget(change_difficulty);
 
-        restart = new QPushButton(verticalLayoutWidget);
+        restart = new QPushButton(GameWindow);
         restart->setObjectName(QString::fromUtf8("restart"));
 
-        verticalLayout->addWidget(restart);
+        horizontalLayout_Controls->addWidget(restart);
+
+        horizontalSpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_Controls->addItem(horizontalSpacer);
+
+        labelFlagIcon = new QLabel(GameWindow);
+        labelFlagIcon->setObjectName(QString::fromUtf8("labelFlagIcon"));
+        labelFlagIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/flag.png")));
+        labelFlagIcon->setScaledContents(true);
+        labelFlagIcon->setMinimumSize(QSize(24, 24));
+        labelFlagIcon->setMaximumSize(QSize(24, 24));
+
+        horizontalLayout_Controls->addWidget(labelFlagIcon);
+
+        flag_count = new QLabel(GameWindow);
+        flag_count->setObjectName(QString::fromUtf8("flag_count"));
+
+        horizontalLayout_Controls->addWidget(flag_count);
+
+        labelTimeIcon = new QLabel(GameWindow);
+        labelTimeIcon->setObjectName(QString::fromUtf8("labelTimeIcon"));
+        labelTimeIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/time.png")));
+        labelTimeIcon->setScaledContents(true);
+        labelTimeIcon->setMinimumSize(QSize(24, 24));
+        labelTimeIcon->setMaximumSize(QSize(24, 24));
+
+        horizontalLayout_Controls->addWidget(labelTimeIcon);
+
+        time = new QLabel(GameWindow);
+        time->setObjectName(QString::fromUtf8("time"));
+
+        horizontalLayout_Controls->addWidget(time);
+
+
+        verticalLayout_WholeWindow->addLayout(horizontalLayout_Controls);
 
 
         retranslateUi(GameWindow);
@@ -109,24 +117,10 @@ public:
     void retranslateUi(QDialog *GameWindow)
     {
         GameWindow->setWindowTitle(QCoreApplication::translate("GameWindow", "D\303\251mineur", nullptr));
-        flag_count->setText(QString());
-        label_3->setText(QCoreApplication::translate("GameWindow", "<html>\n"
-"<head/>\n"
-"<body>\n"
-"<p><img src=\":/images/time.png\" width=\"40\"/></p>\n"
-"</body>\n"
-"</html>\n"
-"", nullptr));
-        time->setText(QString());
-        label->setText(QCoreApplication::translate("GameWindow", "<html>\n"
-"<head/>\n"
-"<body>\n"
-"<p><img src=\":/images/flag.png\" width=\"40\" height=\"40\"/></p>\n"
-"</body>\n"
-"</html>\n"
-"", nullptr));
         change_difficulty->setText(QCoreApplication::translate("GameWindow", "Changer la difficult\303\251", nullptr));
         restart->setText(QCoreApplication::translate("GameWindow", "Recommencer", nullptr));
+        flag_count->setText(QCoreApplication::translate("GameWindow", "0/0", nullptr));
+        time->setText(QCoreApplication::translate("GameWindow", "00:00", nullptr));
     } // retranslateUi
 
 };

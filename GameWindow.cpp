@@ -9,11 +9,13 @@
 
 int flagsPlaced;
 
-GameWindow::GameWindow(QWidget *parent) : QDialog(parent), timer(new QTimer(this)) {
+GameWindow::GameWindow(DifficultySelectionDialog* difficultyDialog, QWidget *parent)
+    : QDialog(parent), m_difficultyDialog(difficultyDialog), timer(new QTimer(this)) {
     ui.setupUi(this);
+    // Your existing initializations go here
+
     connect(ui.change_difficulty, &QPushButton::clicked, this, &GameWindow::changeDifficulty);
     connect(ui.restart, &QPushButton::clicked, this, &GameWindow::restartGame);
-
     connect(timer, &QTimer::timeout, this, &GameWindow::updateTimer);
 
     startGameSound.setSource(QUrl("qrc:/assets/click-start-game.wav"));
@@ -21,12 +23,17 @@ GameWindow::GameWindow(QWidget *parent) : QDialog(parent), timer(new QTimer(this
     victorySoundEffect.setSource(QUrl("qrc:/assets/victory.wav"));
     defeatSoundEffect.setSource(QUrl("qrc:/assets/defeat.wav"));
 
+    // Ensure the rest of your initializations are compatible with having a DifficultySelectionDialog instance
 }
+
 
 void GameWindow::setupGame(int width, int height, int mines) {
     clearGame();
 
-    startGameSound.play();
+    // Exemple de condition avant de jouer un son
+    if (m_difficultyDialog->isSoundEnabled()) {
+        startGameSound.play();
+    }
 
     gameWidth = width;
     gameHeight = height;
@@ -83,6 +90,7 @@ void GameWindow::setupGame(int width, int height, int mines) {
     gameStarted = false;
 
     generateMines(width, height, mines);
+
 }
 
 void GameWindow::generateMines(int width, int height, int mines) {
@@ -104,7 +112,9 @@ void GameWindow::reveal(int x, int y) {
         gameStarted = true; // Marque le début du jeu
     }
 
-    clickSoundEffect.play();
+    if (m_difficultyDialog->isSoundEnabled()) {
+        clickSoundEffect.play();
+    }
 
 
     if (x < 0 || x >= gameWidth || y < 0 || y >= gameHeight || revealedGrid[y][x] || flagGrid[y][x]) {
@@ -217,10 +227,14 @@ void GameWindow::gameOver(bool win) {
     }
 
     if (win) {
-        victorySoundEffect.play(); // Joue le son de victoire
+        if (m_difficultyDialog->isSoundEnabled()) {
+            victorySoundEffect.play();
+        }
         QMessageBox::information(this, "Victoire!", "Vous avez gagné!");
     } else {
-        defeatSoundEffect.play(); // Joue le son de défaite
+        if (m_difficultyDialog->isSoundEnabled()) {
+            defeatSoundEffect.play();
+        }
         QMessageBox::information(this, "Défaite", "Vous avez perdu!");
     }
 }
@@ -248,27 +262,30 @@ void GameWindow::clearGame() {
     // Arrête le timer s'il est en cours d'exécution
     timer->stop();
 
-    // Nettoie les grilles et réinitialise les compteurs
+    // Parcourt chaque rangée de la grille de boutons
     for (int y = 0; y < gameHeight; ++y) {
+        // Parcourt chaque bouton dans la rangée
         for (int x = 0; x < gameWidth; ++x) {
-            // Supprime le bouton de la grille actuelle
-            delete buttonGrid[y][x];
+            // Vérifie si le pointeur vers le bouton n'est pas null
+            if (buttonGrid[y][x] != nullptr) {
+                delete buttonGrid[y][x]; // Supprime l'objet QPushButton
+                buttonGrid[y][x] = nullptr; // Réinitialise le pointeur à nullptr pour éviter l'utilisation après libération
+            }
         }
     }
 
-    // Efface et réinitialise les vecteurs pour les grilles
+    // Efface les contenus des vecteurs pour réinitialiser la grille
     buttonGrid.clear();
     mineGrid.clear();
     revealedGrid.clear();
     flagGrid.clear();
 
-    // Réinitialise les compteurs et les états
+    // Réinitialise les variables d'état du jeu
     flagsPlaced = 0;
     gameStarted = false;
 
+    // Réinitialise l'affichage du temps
     ui.time->setText("");
-
-
-    // Optionnel: réinitialise d'autres états et compteurs ici
 }
+
 
