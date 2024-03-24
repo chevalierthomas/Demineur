@@ -22,7 +22,7 @@ public:
     ScoreManager(const ScoreManager&) = delete;
     void operator=(const ScoreManager&) = delete;
 
-    void recordScore(const QString& playerName, const QTime& time, int width, int height);
+    //void recordScore(const QString& playerName, const QTime& time, int width, int height);
     QList<ScoreRecord> loadScores() const;
     void saveScores(const QList<ScoreRecord>& scores) const;
 
