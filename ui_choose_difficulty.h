@@ -162,7 +162,7 @@ public:
     {
         ChooseDifficultyDialog->setWindowTitle(QCoreApplication::translate("ChooseDifficultyDialog", "D\303\251mineur", nullptr));
         label->setText(QCoreApplication::translate("ChooseDifficultyDialog", "Bienvenue sur notre d\303\251mineur", nullptr));
-        showScoresButton->setText(QCoreApplication::translate("ChooseDifficultyDialog", "Scores", nullptr));
+        showScoresButton->setText(QCoreApplication::translate("ChooseDifficultyDialog", "Tableau des scores", nullptr));
         schema_8_8->setText(QCoreApplication::translate("ChooseDifficultyDialog", "8 x 8", nullptr));
         schema_16_16->setText(QCoreApplication::translate("ChooseDifficultyDialog", "16 x 16", nullptr));
         schema_free->setText(QCoreApplication::translate("ChooseDifficultyDialog", "Personnaliser", nullptr));
