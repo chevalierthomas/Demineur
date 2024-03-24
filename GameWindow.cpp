@@ -11,6 +11,7 @@
 
 
 int flagsPlaced;
+bool isFirst = true;
 
 GameWindow::GameWindow(DifficultySelectionDialog* difficultyDialog, QWidget *parent)
     : QDialog(parent), m_difficultyDialog(difficultyDialog), timer(new QTimer(this)) {
@@ -31,7 +32,10 @@ GameWindow::GameWindow(DifficultySelectionDialog* difficultyDialog, QWidget *par
 
 
 void GameWindow::setupGame(int width, int height, int mines) {
-    clearGame();
+    if(isFirst == false){
+        clearGame();
+    }
+    isFirst = false;
 
     // Exemple de condition avant de jouer un son
     if (m_difficultyDialog->isSoundEnabled()) {
@@ -300,6 +304,7 @@ void GameWindow::clearGame() {
             }
         }
     }
+
 
     // Efface les contenus des vecteurs pour réinitialiser la grille
     buttonGrid.clear();
