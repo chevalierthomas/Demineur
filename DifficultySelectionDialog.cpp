@@ -26,8 +26,14 @@ DifficultySelectionDialog::DifficultySelectionDialog(QWidget *parent) : QDialog(
 }
 
 void DifficultySelectionDialog::onShowScores() {
-    recordsDialog->show(); // Affiche la fenêtre des scores
+    this->hide(); // Cache la fenêtre actuelle avant d'afficher la fenêtre des scores
+    recordsDialog->exec(); // Utilisez exec() si vous voulez une fenêtre modale, sinon utilisez show() pour une fenêtre non modale
+
+    // Optionnel : Si vous voulez que la fenêtre de sélection de difficulté réapparaisse après la fermeture de la fenêtre des scores,
+    // vous pouvez ajouter cette ligne après exec(). Notez que cela ne sera nécessaire que si vous utilisez exec() au lieu de show().
+    this->show();
 }
+
 
 void DifficultySelectionDialog::onToggleSound() {
     soundEnabled = !soundEnabled; // Basculer l'état du son
