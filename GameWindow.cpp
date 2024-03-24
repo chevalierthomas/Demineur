@@ -6,6 +6,9 @@
 #include <QTime>
 #include <QSoundEffect>
 #include <iostream>
+#include <QInputDialog>
+#include <QLineEdit>
+
 
 int flagsPlaced;
 
@@ -213,13 +216,14 @@ void GameWindow::checkWinCondition() {
 }
 
 void GameWindow::gameOver(bool win) {
+    timer->stop(); // Arrête le timer de jeu
+
     // Désactive tous les boutons pour empêcher d'autres actions
     for (int y = 0; y < gameHeight; ++y) {
         for (int x = 0; x < gameWidth; ++x) {
             QPushButton* button = buttonGrid[y][x];
-            button->setEnabled(false); // Désactive le bouton
+            button->setEnabled(false);
             if (mineGrid[y][x] && !win) {
-                // Affiche l'icône de la mine seulement si le joueur perd
                 button->setIcon(QIcon("./images/mine.png"));
                 button->setIconSize(QSize(buttonSize - 10, buttonSize - 10));
             }
@@ -230,14 +234,37 @@ void GameWindow::gameOver(bool win) {
         if (m_difficultyDialog->isSoundEnabled()) {
             victorySoundEffect.play();
         }
-        QMessageBox::information(this, "Victoire!", "Vous avez gagné!");
+        bool ok;
+        QString playerName = QInputDialog::getText(this, tr("Victoire!"),
+                                                   tr("Entrez votre nom pour enregistrer le score :"),
+                                                   QLineEdit::Normal, QString(), &ok);
+        if (ok && !playerName.isEmpty()) {
+            int elapsedSeconds = startTime.elapsed() / 1000;
+            QTime timeElapsed = QTime(0, 0).addSecs(elapsedSeconds);
+
+            // La ligne suivante semble redondante avec le bloc suivant, donc elle est commentée.
+            // ScoreManager::instance().recordScore(playerName, timeElapsed, gameWidth, gameHeight);
+
+            auto scores = ScoreManager::instance().loadScores(); // Charger les scores existants
+            ScoreRecord newScore;
+            newScore.playerName = playerName;
+            newScore.time = timeElapsed; // Utilisation directe de timeElapsed
+            newScore.height = gameHeight;
+            newScore.width = gameWidth;
+            scores.append(newScore); // Ajouter le nouveau score
+            ScoreManager::instance().saveScores(scores); // Sauvegarder la liste mise à jour
+
+            QMessageBox::information(this, tr("Victoire!"), tr("Félicitations ") + playerName + tr(", vous avez gagné !"));
+        }
     } else {
         if (m_difficultyDialog->isSoundEnabled()) {
             defeatSoundEffect.play();
         }
-        QMessageBox::information(this, "Défaite", "Vous avez perdu!");
+        QMessageBox::information(this, tr("Défaite"), tr("Dommage, vous avez perdu. Essayez encore !"));
     }
 }
+
+
 
 void GameWindow::changeDifficulty() {
     emit changeDifficultyRequested(); // Notifiez le besoin de changer de difficulté

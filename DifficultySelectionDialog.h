@@ -5,6 +5,8 @@
 #include <QSoundEffect> // Assurez-vous d'inclure QSoundEffect ici
 
 #include "ui_choose_difficulty.h" // Généré depuis choose_difficulty.ui
+#include "RecordsDialog.h"
+
 
 class DifficultySelectionDialog : public QDialog {
     Q_OBJECT
@@ -23,12 +25,14 @@ private slots:
     void onHardGameSelected();
     void onCustomizationSelected();
     void onExitRequested();
-    void onToggleSound(); // Ajoutez cette ligne
+    void onToggleSound();
+    void onShowScores();
 
 private:
     Ui::ChooseDifficultyDialog ui;
     QSoundEffect exitGameSoundEffect;
-    bool soundEnabled = true; // Ajoutez cette ligne pour suivre l'état du son
+    bool soundEnabled = true;
+    RecordsDialog* recordsDialog;
 
     void updateSoundButtonIcon(); // Méthode pour mettre à jour l'icône du bouton son
 };

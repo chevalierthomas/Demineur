@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>GameWindow</class>
  <widget class="QDialog" name="GameWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>391</width>
+    <height>120</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>Démineur</string>
   </property>
@@ -12,6 +20,14 @@
       <bool>true</bool>
      </property>
      <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>371</width>
+        <height>68</height>
+       </rect>
+      </property>
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -38,7 +54,6 @@
        </property>
       </widget>
      </item>
-     
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -47,32 +62,36 @@
        <property name="sizeType">
         <enum>QSizePolicy::Expanding</enum>
        </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
       </spacer>
      </item>
-     
-	<item>
-	  <widget class="QLabel" name="labelFlagIcon">
-	    <property name="pixmap">
-	      <pixmap>:/images/flag.png</pixmap>
-	    </property>
-	    <property name="scaledContents">
-	      <bool>true</bool>
-	    </property>
-	    <property name="minimumSize">
-	      <size>
-		<width>24</width>
-		<height>24</height>
-	      </size>
-	    </property>
-	    <property name="maximumSize">
-	      <size>
-		<width>24</width>
-		<height>24</height>
-	      </size>
-	    </property>
-	  </widget>
-	</item>
-     
+     <item>
+      <widget class="QLabel" name="labelFlagIcon">
+       <property name="minimumSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/images/flag.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QLabel" name="flag_count">
        <property name="text">
@@ -80,30 +99,28 @@
        </property>
       </widget>
      </item>
-     
-	<item>
-	  <widget class="QLabel" name="labelTimeIcon">
-	    <property name="pixmap">
-	      <pixmap>:/images/time.png</pixmap>
-	    </property>
-	    <property name="scaledContents">
-	      <bool>true</bool>
-	    </property>
-	    <property name="minimumSize">
-	      <size>
-		<width>24</width>
-		<height>24</height>
-	      </size>
-	    </property>
-	    <property name="maximumSize">
-	      <size>
-		<width>24</width>
-		<height>24</height>
-	      </size>
-	    </property>
-	  </widget>
-	</item>
-     
+     <item>
+      <widget class="QLabel" name="labelTimeIcon">
+       <property name="minimumSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/images/time.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QLabel" name="time">
        <property name="text">
@@ -120,4 +137,3 @@
  </resources>
  <connections/>
 </ui>
-

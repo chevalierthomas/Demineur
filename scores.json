@@ -1,0 +1,16 @@
+{
+    "scores": [
+        {
+            "height": 10,
+            "name": "test1",
+            "time": "00:00:16",
+            "width": 10
+        },
+        {
+            "height": 10,
+            "name": "test2",
+            "time": "00:00:05",
+            "width": 10
+        }
+    ]
+}

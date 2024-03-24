@@ -29,12 +29,13 @@ public:
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *headerLayout;
     QLabel *label;
+    QPushButton *showScoresButton;
     QPushButton *soundButton;
     QGridLayout *gridLayout;
-    QPushButton *schema_30_16;
-    QPushButton *schema_free;
     QPushButton *schema_8_8;
     QPushButton *schema_16_16;
+    QPushButton *schema_free;
+    QPushButton *schema_30_16;
     QPushButton *exitButton;
 
     void setupUi(QDialog *ChooseDifficultyDialog)
@@ -43,8 +44,8 @@ public:
             ChooseDifficultyDialog->setObjectName(QString::fromUtf8("ChooseDifficultyDialog"));
         ChooseDifficultyDialog->resize(1000, 1000);
         ChooseDifficultyDialog->setStyleSheet(QString::fromUtf8("\n"
-"QPushButton { background-color: rgb(119, 118, 123); }\n"
-""));
+"                QPushButton { background-color: rgb(119, 118, 123); }\n"
+"            "));
         verticalLayoutWidget_2 = new QWidget(ChooseDifficultyDialog);
         verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
         verticalLayoutWidget_2->setGeometry(QRect(10, 10, 981, 981));
@@ -63,11 +64,20 @@ public:
 
         headerLayout->addWidget(label);
 
+        showScoresButton = new QPushButton(verticalLayoutWidget_2);
+        showScoresButton->setObjectName(QString::fromUtf8("showScoresButton"));
+        showScoresButton->setBaseSize(QSize(100, 24));
+        showScoresButton->setStyleSheet(QString::fromUtf8("\n"
+"                                        QPushButton { background-color: rgb(85, 170, 255); color: white; }\n"
+"                                    "));
+
+        headerLayout->addWidget(showScoresButton);
+
         soundButton = new QPushButton(verticalLayoutWidget_2);
         soundButton->setObjectName(QString::fromUtf8("soundButton"));
         soundButton->setStyleSheet(QString::fromUtf8("\n"
-"QPushButton { max-width: 40px; max-height: 40px; }\n"
-""));
+"                                        QPushButton { max-width: 40px; max-height: 40px; }\n"
+"                                    "));
         QIcon icon;
         icon.addFile(QString::fromUtf8("images/sound-off.png"), QSize(), QIcon::Normal, QIcon::Off);
         soundButton->setIcon(icon);
@@ -81,64 +91,64 @@ public:
         gridLayout->setSpacing(50);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(-1, 0, 0, -1);
-        schema_30_16 = new QPushButton(verticalLayoutWidget_2);
-        schema_30_16->setObjectName(QString::fromUtf8("schema_30_16"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(schema_30_16->sizePolicy().hasHeightForWidth());
-        schema_30_16->setSizePolicy(sizePolicy);
-        schema_30_16->setFont(font);
-        schema_30_16->setStyleSheet(QString::fromUtf8("\n"
-"QPushButton { background-color: rgb(255, 190, 111); }\n"
-""));
-
-        gridLayout->addWidget(schema_30_16, 1, 0, 1, 1);
-
-        schema_free = new QPushButton(verticalLayoutWidget_2);
-        schema_free->setObjectName(QString::fromUtf8("schema_free"));
-        sizePolicy.setHeightForWidth(schema_free->sizePolicy().hasHeightForWidth());
-        schema_free->setSizePolicy(sizePolicy);
-        schema_free->setFont(font);
-        schema_free->setStyleSheet(QString::fromUtf8("\n"
-"QPushButton { background-color: rgb(255, 190, 111); }\n"
-""));
-
-        gridLayout->addWidget(schema_free, 1, 1, 1, 1);
-
         schema_8_8 = new QPushButton(verticalLayoutWidget_2);
         schema_8_8->setObjectName(QString::fromUtf8("schema_8_8"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Expanding);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(schema_8_8->sizePolicy().hasHeightForWidth());
-        schema_8_8->setSizePolicy(sizePolicy1);
-        schema_8_8->setMinimumSize(QSize(0, 0));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(schema_8_8->sizePolicy().hasHeightForWidth());
+        schema_8_8->setSizePolicy(sizePolicy);
         schema_8_8->setFont(font);
         schema_8_8->setStyleSheet(QString::fromUtf8("\n"
-"QPushButton { background-color: rgb(255, 190, 111); }\n"
-""));
+"                                        QPushButton { background-color: rgb(255, 190, 111); }\n"
+"                                    "));
 
         gridLayout->addWidget(schema_8_8, 0, 0, 1, 1);
 
         schema_16_16 = new QPushButton(verticalLayoutWidget_2);
         schema_16_16->setObjectName(QString::fromUtf8("schema_16_16"));
-        sizePolicy.setHeightForWidth(schema_16_16->sizePolicy().hasHeightForWidth());
-        schema_16_16->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(schema_16_16->sizePolicy().hasHeightForWidth());
+        schema_16_16->setSizePolicy(sizePolicy1);
         schema_16_16->setFont(font);
         schema_16_16->setStyleSheet(QString::fromUtf8("\n"
-"QPushButton { background-color: rgb(255, 190, 111); }\n"
-""));
+"                                        QPushButton { background-color: rgb(255, 190, 111); }\n"
+"                                    "));
 
         gridLayout->addWidget(schema_16_16, 0, 1, 1, 1);
+
+        schema_free = new QPushButton(verticalLayoutWidget_2);
+        schema_free->setObjectName(QString::fromUtf8("schema_free"));
+        sizePolicy1.setHeightForWidth(schema_free->sizePolicy().hasHeightForWidth());
+        schema_free->setSizePolicy(sizePolicy1);
+        schema_free->setFont(font);
+        schema_free->setStyleSheet(QString::fromUtf8("\n"
+"                                        QPushButton { background-color: rgb(255, 190, 111); }\n"
+"                                    "));
+
+        gridLayout->addWidget(schema_free, 1, 1, 1, 1);
+
+        schema_30_16 = new QPushButton(verticalLayoutWidget_2);
+        schema_30_16->setObjectName(QString::fromUtf8("schema_30_16"));
+        sizePolicy1.setHeightForWidth(schema_30_16->sizePolicy().hasHeightForWidth());
+        schema_30_16->setSizePolicy(sizePolicy1);
+        schema_30_16->setFont(font);
+        schema_30_16->setStyleSheet(QString::fromUtf8("\n"
+"                                        QPushButton { background-color: rgb(255, 190, 111); }\n"
+"                                    "));
+
+        gridLayout->addWidget(schema_30_16, 1, 0, 1, 1);
 
 
         verticalLayout_2->addLayout(gridLayout);
 
         exitButton = new QPushButton(verticalLayoutWidget_2);
         exitButton->setObjectName(QString::fromUtf8("exitButton"));
-        exitButton->setStyleSheet(QString::fromUtf8("QPushButton { background-color:rgb(237, 51, 59); }\n"
-""));
+        exitButton->setStyleSheet(QString::fromUtf8("\n"
+"                                QPushButton { background-color:rgb(237, 51, 59); color: white; }\n"
+"                            "));
 
         verticalLayout_2->addWidget(exitButton);
 
@@ -152,10 +162,11 @@ public:
     {
         ChooseDifficultyDialog->setWindowTitle(QCoreApplication::translate("ChooseDifficultyDialog", "D\303\251mineur", nullptr));
         label->setText(QCoreApplication::translate("ChooseDifficultyDialog", "Bienvenue sur notre d\303\251mineur", nullptr));
-        schema_30_16->setText(QCoreApplication::translate("ChooseDifficultyDialog", "30 x 16", nullptr));
-        schema_free->setText(QCoreApplication::translate("ChooseDifficultyDialog", "Personnaliser", nullptr));
+        showScoresButton->setText(QCoreApplication::translate("ChooseDifficultyDialog", "Scores", nullptr));
         schema_8_8->setText(QCoreApplication::translate("ChooseDifficultyDialog", "8 x 8", nullptr));
         schema_16_16->setText(QCoreApplication::translate("ChooseDifficultyDialog", "16 x 16", nullptr));
+        schema_free->setText(QCoreApplication::translate("ChooseDifficultyDialog", "Personnaliser", nullptr));
+        schema_30_16->setText(QCoreApplication::translate("ChooseDifficultyDialog", "30 x 16", nullptr));
         exitButton->setText(QCoreApplication::translate("ChooseDifficultyDialog", "Quitter", nullptr));
     } // retranslateUi
 

@@ -7,6 +7,10 @@
 DifficultySelectionDialog::DifficultySelectionDialog(QWidget *parent) : QDialog(parent), soundEnabled(true) {
     ui.setupUi(this);
 
+    recordsDialog = new RecordsDialog(this); // Ajoutez cette ligne
+
+    connect(ui.showScoresButton, &QPushButton::clicked, this, &DifficultySelectionDialog::onShowScores); // Assurez-vous d'ajouter un QPushButton dans votre ui avec le nom "showScoresButton"
+
     connect(ui.schema_8_8, &QPushButton::clicked, this, &DifficultySelectionDialog::onStandardGameSelected);
     connect(ui.schema_16_16, &QPushButton::clicked, this, &DifficultySelectionDialog::onMediumGameSelected);
     connect(ui.schema_30_16, &QPushButton::clicked, this, &DifficultySelectionDialog::onHardGameSelected);
@@ -19,6 +23,10 @@ DifficultySelectionDialog::DifficultySelectionDialog(QWidget *parent) : QDialog(
     connect(ui.soundButton, &QPushButton::clicked, this, &DifficultySelectionDialog::onToggleSound);
 
     updateSoundButtonIcon(); // Assurez-vous que l'icône initiale est correcte
+}
+
+void DifficultySelectionDialog::onShowScores() {
+    recordsDialog->show(); // Affiche la fenêtre des scores
 }
 
 void DifficultySelectionDialog::onToggleSound() {

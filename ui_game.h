@@ -43,6 +43,7 @@ public:
     {
         if (GameWindow->objectName().isEmpty())
             GameWindow->setObjectName(QString::fromUtf8("GameWindow"));
+        GameWindow->resize(391, 120);
         verticalLayout_WholeWindow = new QVBoxLayout(GameWindow);
         verticalLayout_WholeWindow->setObjectName(QString::fromUtf8("verticalLayout_WholeWindow"));
         gameAreaScroll = new QScrollArea(GameWindow);
@@ -50,6 +51,7 @@ public:
         gameAreaScroll->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 371, 68));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -79,10 +81,10 @@ public:
 
         labelFlagIcon = new QLabel(GameWindow);
         labelFlagIcon->setObjectName(QString::fromUtf8("labelFlagIcon"));
-        labelFlagIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/flag.png")));
-        labelFlagIcon->setScaledContents(true);
         labelFlagIcon->setMinimumSize(QSize(24, 24));
         labelFlagIcon->setMaximumSize(QSize(24, 24));
+        labelFlagIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/flag.png")));
+        labelFlagIcon->setScaledContents(true);
 
         horizontalLayout_Controls->addWidget(labelFlagIcon);
 
@@ -93,10 +95,10 @@ public:
 
         labelTimeIcon = new QLabel(GameWindow);
         labelTimeIcon->setObjectName(QString::fromUtf8("labelTimeIcon"));
-        labelTimeIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/time.png")));
-        labelTimeIcon->setScaledContents(true);
         labelTimeIcon->setMinimumSize(QSize(24, 24));
         labelTimeIcon->setMaximumSize(QSize(24, 24));
+        labelTimeIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/time.png")));
+        labelTimeIcon->setScaledContents(true);
 
         horizontalLayout_Controls->addWidget(labelTimeIcon);
 

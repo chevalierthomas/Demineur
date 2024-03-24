@@ -15,8 +15,8 @@
   </property>
   <property name="styleSheet">
    <string notr="true">
-QPushButton { background-color: rgb(119, 118, 123); }
-</string>
+                QPushButton { background-color: rgb(119, 118, 123); }
+            </string>
   </property>
   <widget class="QWidget" name="verticalLayoutWidget_2">
    <property name="geometry">
@@ -59,11 +59,29 @@ QPushButton { background-color: rgb(119, 118, 123); }
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="showScoresButton">
+        <property name="baseSize">
+         <size>
+          <width>100</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+                                        QPushButton { background-color: rgb(85, 170, 255); color: white; }
+                                    </string>
+        </property>
+        <property name="text">
+         <string>Scores</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="soundButton">
         <property name="styleSheet">
          <string notr="true">
-QPushButton { max-width: 40px; max-height: 40px; }
-</string>
+                                        QPushButton { max-width: 40px; max-height: 40px; }
+                                    </string>
         </property>
         <property name="icon">
          <iconset>
@@ -84,54 +102,6 @@ QPushButton { max-width: 40px; max-height: 40px; }
       <property name="spacing">
        <number>50</number>
       </property>
-      <item row="1" column="0">
-       <widget class="QPushButton" name="schema_30_16">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>20</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">
-QPushButton { background-color: rgb(255, 190, 111); }
-</string>
-        </property>
-        <property name="text">
-         <string>30 x 16</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="schema_free">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>20</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">
-QPushButton { background-color: rgb(255, 190, 111); }
-</string>
-        </property>
-        <property name="text">
-         <string>Personnaliser</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="0">
        <widget class="QPushButton" name="schema_8_8">
         <property name="sizePolicy">
@@ -140,12 +110,6 @@ QPushButton { background-color: rgb(255, 190, 111); }
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
         <property name="font">
          <font>
           <pointsize>20</pointsize>
@@ -154,8 +118,8 @@ QPushButton { background-color: rgb(255, 190, 111); }
         </property>
         <property name="styleSheet">
          <string notr="true">
-QPushButton { background-color: rgb(255, 190, 111); }
-</string>
+                                        QPushButton { background-color: rgb(255, 190, 111); }
+                                    </string>
         </property>
         <property name="text">
          <string>8 x 8</string>
@@ -178,11 +142,59 @@ QPushButton { background-color: rgb(255, 190, 111); }
         </property>
         <property name="styleSheet">
          <string notr="true">
-QPushButton { background-color: rgb(255, 190, 111); }
-</string>
+                                        QPushButton { background-color: rgb(255, 190, 111); }
+                                    </string>
         </property>
         <property name="text">
          <string>16 x 16</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="schema_free">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+                                        QPushButton { background-color: rgb(255, 190, 111); }
+                                    </string>
+        </property>
+        <property name="text">
+         <string>Personnaliser</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="schema_30_16">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+                                        QPushButton { background-color: rgb(255, 190, 111); }
+                                    </string>
+        </property>
+        <property name="text">
+         <string>30 x 16</string>
         </property>
        </widget>
       </item>
@@ -191,8 +203,9 @@ QPushButton { background-color: rgb(255, 190, 111); }
     <item>
      <widget class="QPushButton" name="exitButton">
       <property name="styleSheet">
-       <string notr="true">QPushButton { background-color:rgb(237, 51, 59); }
-</string>
+       <string notr="true">
+                                QPushButton { background-color:rgb(237, 51, 59); color: white; }
+                            </string>
       </property>
       <property name="text">
        <string>Quitter</string>

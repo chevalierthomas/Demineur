@@ -10,6 +10,7 @@
 #include <QSoundEffect>
 
 #include "DifficultySelectionDialog.h"
+#include "ScoreManager.h"
 #include "ui_game.h" // Assurez-vous que le nom correspond à votre fichier UI généré
 
 class GameWindow : public QDialog {

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RecordsDialog</class>
+ <widget class="QDialog" name="RecordsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>440</width>
+    <height>488</height>
+   </rect>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>440</width>
+    <height>490</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Records</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item alignment="Qt::AlignHCenter">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <pointsize>24</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Scores</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="scoresTable">
+     <property name="horizontalHeader" stdset="0">
+      <stringlist>
+       <string>Name</string>
+       <string>Time</string>
+       <string>Height</string>
+       <string>Width</string>
+      </stringlist>
+     </property>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Nom</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Temps</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Hauteur</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Largeur</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   
+	<item>
+	  <layout class="QHBoxLayout" name="buttonLayout">
+	    <item>
+	      <widget class="QPushButton" name="clearButton">
+		<property name="text">
+		  <string>Clear</string>
+		</property>
+		<property name="styleSheet">
+		  <string notr="true">QPushButton { background-color: rgb(255, 87, 34); color: white; }</string>
+		</property>
+	      </widget>
+	    </item>
+	    <item>
+	      <widget class="QPushButton" name="returnButton">
+		<property name="styleSheet">
+		  <string notr="true">QPushButton { background-color: red; color: white; }</string>
+		</property>
+		<property name="text">
+		  <string>Retour</string>
+		</property>
+	      </widget>
+	    </item>
+	  </layout>
+	</item>
+
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
