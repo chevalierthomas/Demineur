@@ -25,6 +25,7 @@ signals:
     void changeDifficultyRequested();
 
 private:
+    bool gameFinished = false;
     DifficultySelectionDialog* m_difficultyDialog; // Pointeur vers la fenêtre de sélection de difficulté pour accéder à l'état du son
 
     Ui::GameWindow ui;

@@ -37,6 +37,8 @@ void GameWindow::setupGame(int width, int height, int mines) {
     }
     isFirst = false;
 
+    gameFinished = false; // Prépare pour une nouvelle partie
+
     // Vérifie si le son est activé et joue le son de début de jeu si c'est le cas
     if (m_difficultyDialog->isSoundEnabled()) {
         startGameSound.play();
@@ -217,51 +219,56 @@ void GameWindow::checkWinCondition() {
 }
 
 void GameWindow::gameOver(bool win) {
-    timer->stop(); // Arrêtez le timer dès que le jeu se termine pour capturer le temps de jeu actuel.
+    if (!gameFinished) {
+        gameFinished = true; // Empêche de réentrer dans cette méthode
 
-    int elapsedSeconds = startTime.elapsed() / 1000;
-    QTime timeElapsed = QTime(0, 0, 0, 0).addSecs(elapsedSeconds);
 
-    // Désactivez tous les boutons pour empêcher d'autres interactions.
-    for (int y = 0; y < gameHeight; ++y) {
-        for (int x = 0; x < gameWidth; ++x) {
-            QPushButton* button = buttonGrid[y][x];
-            button->setEnabled(false);
-            if (mineGrid[y][x] && !win) {
-                button->setIcon(QIcon("./images/mine.png"));
-                button->setIconSize(QSize(buttonSize - 10, buttonSize - 10));
+        timer->stop(); // Arrêtez le timer dès que le jeu se termine pour capturer le temps de jeu actuel.
+
+        int elapsedSeconds = startTime.elapsed() / 1000;
+        QTime timeElapsed = QTime(0, 0, 0, 0).addSecs(elapsedSeconds);
+
+        // Désactivez tous les boutons pour empêcher d'autres interactions.
+        for (int y = 0; y < gameHeight; ++y) {
+            for (int x = 0; x < gameWidth; ++x) {
+                QPushButton* button = buttonGrid[y][x];
+                button->setEnabled(false);
+                if (mineGrid[y][x] && !win) {
+                    button->setIcon(QIcon("./images/mine.png"));
+                    button->setIconSize(QSize(buttonSize - 10, buttonSize - 10));
+                }
             }
         }
+
+        if (win) {
+            if (m_difficultyDialog->isSoundEnabled()) {
+                victorySoundEffect.play();
+            }
+
+            // Demandez le nom du joueur avant d'enregistrer le score.
+            bool ok;
+            QString playerName = QInputDialog::getText(this, tr("Victoire!"),
+                                                       tr("Entrez votre nom pour enregistrer le score :"),
+                                                       QLineEdit::Normal, QString(), &ok);
+
+            if (ok && !playerName.isEmpty()) {
+                // Chargez les scores existants, ajoutez le nouveau score, puis sauvegardez tout.
+                QList<ScoreRecord> scores = ScoreManager::instance().loadScores();
+                ScoreRecord newScore{playerName, timeElapsed, gameWidth, gameHeight};
+                scores.append(newScore);
+                ScoreManager::instance().saveScores(scores);
+
+                QMessageBox::information(this, tr("Victoire!"), tr("Félicitations ") + playerName + tr(", vous avez gagné !"));
+            }
+        } else {
+            if (m_difficultyDialog->isSoundEnabled()) {
+                defeatSoundEffect.play();
+            }
+            QMessageBox::information(this, tr("Défaite"), tr("Dommage, vous avez perdu. Essayez encore !"));
+        }
+
+        // Préparez pour un nouveau jeu ou la fermeture du jeu ici si nécessaire.
     }
-
-    if (win) {
-        if (m_difficultyDialog->isSoundEnabled()) {
-            victorySoundEffect.play();
-        }
-
-        // Demandez le nom du joueur avant d'enregistrer le score.
-        bool ok;
-        QString playerName = QInputDialog::getText(this, tr("Victoire!"),
-                                                   tr("Entrez votre nom pour enregistrer le score :"),
-                                                   QLineEdit::Normal, QString(), &ok);
-
-        if (ok && !playerName.isEmpty()) {
-            // Chargez les scores existants, ajoutez le nouveau score, puis sauvegardez tout.
-            QList<ScoreRecord> scores = ScoreManager::instance().loadScores();
-            ScoreRecord newScore{playerName, timeElapsed, gameWidth, gameHeight};
-            scores.append(newScore);
-            ScoreManager::instance().saveScores(scores);
-
-            QMessageBox::information(this, tr("Victoire!"), tr("Félicitations ") + playerName + tr(", vous avez gagné !"));
-        }
-    } else {
-        if (m_difficultyDialog->isSoundEnabled()) {
-            defeatSoundEffect.play();
-        }
-        QMessageBox::information(this, tr("Défaite"), tr("Dommage, vous avez perdu. Essayez encore !"));
-    }
-
-    // Préparez pour un nouveau jeu ou la fermeture du jeu ici si nécessaire.
 }
 
 
