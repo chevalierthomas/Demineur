@@ -37,7 +37,7 @@ void GameWindow::setupGame(int width, int height, int mines) {
     }
     isFirst = false;
 
-    // Exemple de condition avant de jouer un son
+    // Vérifie si le son est activé et joue le son de début de jeu si c'est le cas
     if (m_difficultyDialog->isSoundEnabled()) {
         startGameSound.play();
     }
@@ -54,51 +54,48 @@ void GameWindow::setupGame(int width, int height, int mines) {
     buttonGrid.clear();
     buttonGrid.resize(height);
     mineGrid.clear();
-    mineGrid.resize(height); // Redimensionne le vecteur externe
+    mineGrid.resize(height);
     revealedGrid.clear();
-    revealedGrid.resize(height); // Redimensionne le vecteur externe
+    revealedGrid.resize(height);
     flagGrid.clear();
-    flagGrid.resize(height); // Redimensionne le vecteur externe
+    flagGrid.resize(height);
 
     for (int i = 0; i < height; ++i) {
-        mineGrid[i].resize(width); // Corrigé pour redimensionner sans le deuxième argument
-        for (int j = 0; j < width; ++j) {
-            mineGrid[i][j] = false; // Initialisez chaque élément à false séparément
-        }
+        mineGrid[i].resize(width);
         revealedGrid[i].resize(width);
-        for (int j = 0; j < width; ++j) {
-            revealedGrid[i][j] = false; // Identique pour revealedGrid
-        }
         flagGrid[i].resize(width);
         for (int j = 0; j < width; ++j) {
-            flagGrid[i][j] = false; // Et pour flagGrid
+            mineGrid[i][j] = false;
+            revealedGrid[i][j] = false;
+            flagGrid[i][j] = false;
         }
     }
 
-    const int buttonSize = 40; // Taille des boutons
+    const int buttonSize = 40; // Supposons que chaque bouton a une taille de 40x40.
 
     for (int y = 0; y < height; ++y) {
         buttonGrid[y].resize(width);
         for (int x = 0; x < width; ++x) {
             QPushButton* button = new QPushButton();
             button->setFixedSize(buttonSize, buttonSize);
-            button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
             grid->addWidget(button, y, x);
             buttonGrid[y][x] = button;
-
             connect(button, &QPushButton::clicked, [this, x, y]() { this->reveal(x, y); });
-            // Ajout de la fonctionnalité de marquage par un clic droit
             button->setContextMenuPolicy(Qt::CustomContextMenu);
             connect(button, &QPushButton::customContextMenuRequested, [this, x, y](const QPoint &) { this->toggleFlag(x, y); });
         }
     }
 
-    updateFlagCount(); // Mettez à jour l'affichage du compteur de drapeaux
+    updateFlagCount();
     gameStarted = false;
-
     generateMines(width, height, mines);
 
+    // Ajustement de la taille de la fenêtre
+    int extraSpace = 100; // Ajustez cette valeur selon vos besoins d'UI
+    this->setMinimumSize(width * buttonSize + extraSpace, height * buttonSize + extraSpace);
+    this->adjustSize();
 }
+
 
 void GameWindow::generateMines(int width, int height, int mines) {
     while (mines > 0) {
